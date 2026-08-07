@@ -33,6 +33,10 @@ dotnet run --launch-profile https
 
 Starts the ASP.NET Core API using the `https` launch profile defined by the project.
 
+## Building Project after adding packages
+```bash
+dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+```
 
 
 # Fix: EF Core namespace missing
@@ -49,3 +53,12 @@ Other providers: `.SqlServer`, `.Sqlite`, `Npgsql.EntityFrameworkCore.PostgreSQL
 
 If version fails: drop `Version` attr or `dotnet add package Microsoft.EntityFrameworkCore.InMemory`
 
+```bash
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet tool uninstall -g dotnet-aspnet-codegenerator
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet tool update -g dotnet-aspnet-codegenerator
+```
