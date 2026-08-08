@@ -21,4 +21,6 @@ public class TodoItem
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? CompletedAt { get; set; }
     public string? Notes { get; set; }
+    public string? Secret {get; set; }
+    
 }
