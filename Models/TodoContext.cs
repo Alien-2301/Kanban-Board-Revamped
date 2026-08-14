@@ -14,9 +14,9 @@ public class TodoContext : DbContext
     #region Required 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Blog>()
-            .Property(b => b.Url)
-            .IsRequired();
+        modelBuilder.Entity<TodoItem>()
+            .Property(b => b.Status)
+            .HasConversion<string>();
     }
     #endregion
 }

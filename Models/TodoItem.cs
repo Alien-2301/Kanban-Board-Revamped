@@ -1,14 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
-
 namespace TodoApi.Models;
 
-public enum TodoStatus
-{
-    Todo,
-    InProgress,
-    Pending, 
-    Done
-}
 
 public class TodoItem
 {
