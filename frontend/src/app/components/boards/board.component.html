@@ -1,0 +1,19 @@
+<div class="board">
+  <button (click)="openNewCard()"> + Add Card</button>
+
+    <app-column
+    *ngFor="let col of columns(); trackBy: trackByColumnId"
+    [title]="col.title"
+    [items]="col.items"
+    [listID]="col.id"
+    [connectedColumn]="otherColumnIds(col.id)"
+    (dropped)="onDrop($event)"
+    (deleteCard)="deleteCard($event)"
+    (editCard)="openEditCard($event)"
+    ></app-column>
+  
+  <app-card-editor
+    *ngIf="showEditor"
+    (save)="saveCard($event)"
+    (cancel)="closeEditor()" ></app-card-editor>
+</div>

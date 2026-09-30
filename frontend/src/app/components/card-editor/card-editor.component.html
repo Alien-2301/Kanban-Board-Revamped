@@ -1,0 +1,27 @@
+<div class="overlay" (click)="cancel.emit()">
+
+    <!-- $event.stopPropagation()
+    * $event: event that just happened 
+    * stopPropagation() does not reach to div overlay (parent)
+    -->
+
+    <div class = "editor" (click)="$event.stopPropagation()">
+        <h2>New Card</h2>
+        <label>
+            Title
+            <input type ="text" [(ngModel)]="name"/>
+        </label>
+        <label>
+            Category
+            <input type ="text" [(ngModel)]="category"/>
+        </label>
+
+        <div class="actions">
+            <button (click)="cancel.emit()">Cancel</button>
+            <button (click)="onSave()">Save</button>
+        </div>
+
+    </div>
+</div>
+
+

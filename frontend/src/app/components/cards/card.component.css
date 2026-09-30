@@ -1,0 +1,62 @@
+/* background: #f7f8fb; — Sets the card's background colour to a very light grey.
+border: 1px solid #e3e6ed; — Adds a 1-pixel solid light-grey border around the card.
+border-radius: 6px; — Rounds the card's corners by 6 pixels.
+padding: 12px; — Adds 12 pixels of space between the card's content and its border.
+margin-top: 10px; — Adds 10 pixels of space above the card. */
+
+.card {
+  --accent: #9ca3af;              /* default / unknown priority */
+  --accent-soft: #f3f4f6;
+
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e3e6ed;
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-top: 10px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+              border-color 0.15s ease;
+}
+
+/* Interaction states */
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 24, 40, 0.12);
+  border-color: var(--accent);
+}
+.card:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(16, 24, 40, 0.1);
+}
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Header row */
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.priority {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card, .grip { transition: none; }
+  .card:hover { transform: none; }
+}
+

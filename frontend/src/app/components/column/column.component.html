@@ -1,0 +1,38 @@
+<div class= "column">
+    <h2>{{title}}</h2>
+    <p style="font-size: 10px; color: red;">{{ listID }} connects to: {{ connectedColumn }}</p>
+    <div 
+     cdkDropList
+     [id]= "listID"
+     [cdkDropListData]="items"
+     [cdkDropListConnectedTo] = "connectedColumn"
+     
+     (cdkDropListDropped)="dropped.emit($event)"
+    >
+        <app-card 
+        *ngFor ="let item of items" 
+        [item] = "item"
+        cdkDrag
+        [cdkDragData] = "item"
+        (delete) = "deleteCard.emit($event)"
+        (edit) = "editCard.emit($event)"
+        >
+        </app-card>
+    </div>
+</div>
+
+    <!-- 
+        CARD
+        <button>
+        ↓
+        onDelete()
+        ↓
+        this.delete.emit(item.id)
+        ↓
+        COLUMN
+        (delete)="deleteCard.emit($event)"
+        ↓
+        this.deleteCard.emit(item.id)
+        ↓
+        PARENT / BOARD
+    -->

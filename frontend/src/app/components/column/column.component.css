@@ -1,0 +1,20 @@
+.column {
+    flex: 1;
+    min-width: 260px;
+    background: white;
+    border: 1px solid #e3e6ed;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.column h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* NEW — targets the cdkDropList div specifically */
+.column [cdkDropList] {
+  min-height: 200px;
+  margin-top: 8px;
+}
