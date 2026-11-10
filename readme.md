@@ -56,7 +56,59 @@ Kanban-Board-Revamped/
 
 ## Getting Started
 
-### 1. Run the backend
+### Option A: Run both together (recommended)
+
+From the repo root, once:
+
+```bash
+npm install                 # installs `concurrently` at the root
+npm run install:all         # installs frontend deps + restores backend packages
+```
+
+Then every time:
+
+```bash
+npm run dev
+```
+
+This starts the API (`http://localhost:5175`) and the Angular app (`http://localhost:4200`) in one terminal, with colour-coded `api` / `web` logs. Press `Ctrl+C` once to stop both.
+
+Add this `package.json` to the **repo root**:
+
+```json
+{
+  "name": "kanban-board-revamped",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix frontend && dotnet restore backend",
+    "dev": "concurrently -k -n api,web -c blue,green \"dotnet run --project backend --launch-profile http\" \"npm start --prefix frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
+```
+
+### Option B: No extra files, one-liner
+
+macOS / Linux / Git Bash:
+
+```bash
+(cd backend && dotnet run --launch-profile http) & (cd frontend && npm install && npm start)
+```
+
+Windows PowerShell:
+
+```powershell
+Start-Process powershell -ArgumentList '-NoExit','-Command','cd backend; dotnet run --launch-profile http'
+cd frontend; npm install; npm start
+```
+
+(PowerShell opens the API in a second window.)
+
+### Option C: Run them separately
+
+**Backend**
 
 ```bash
 cd backend
@@ -64,18 +116,7 @@ dotnet restore
 dotnet run --launch-profile http
 ```
 
-The API runs at **http://localhost:5175** and Swagger UI at **http://localhost:5175/swagger**.
-
-> Use the `http` profile. The frontend calls `http://localhost:5175`, and the `https` profile redirects that to HTTPS, which breaks the browser's CORS preflight request.
-
-If you need to create or update the database from the migrations:
-
-```bash
-dotnet tool install --global dotnet-ef   # once
-dotnet ef database update
-```
-
-### 2. Run the frontend
+**Frontend** (in a second terminal)
 
 ```bash
 cd frontend
@@ -83,9 +124,18 @@ npm install
 npm start
 ```
 
-Open **http://localhost:4200**.
+> Use the `http` profile. The frontend calls `http://localhost:5175`, and the `https` profile redirects that to HTTPS, which breaks the browser's CORS preflight request.
 
-### 3. Run the frontend tests
+Then open **http://localhost:4200**.
+
+If you need to create or update the database from the migrations:
+
+```bash
+dotnet tool install --global dotnet-ef   # once
+cd backend && dotnet ef database update
+```
+
+### Run the frontend tests
 
 ```bash
 cd frontend
